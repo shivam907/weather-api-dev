@@ -25,10 +25,9 @@ form.addEventListener("submit", (el) => {
   el.preventDefault();
   const city = input.value;
   fetch(
-    `http://api.weatherstack.com/current?access_key=113582164e8a6873ca56cbba32c571ee&query=${city}`,
-    {
-      referrerPolicy: "unsafe-url",
-    }
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
+      city +
+      "&units=metric&appid=c445762544df62f5dc5ccf510d289aea"
   )
     .then((res) => {
       console.log(res);
@@ -37,18 +36,21 @@ form.addEventListener("submit", (el) => {
     .then((apiResponse) => {
       console.log(apiResponse);
       weather.classList.remove("op");
-      immmg.src = apiResponse.current.weather_icons[0];
+      let img = apiResponse.weather[0].icon;
+
+      immmg.src = `http://openweathermap.org/img/wn/${img}.png`;
       weather1.textContent = "City: ";
-      data1.textContent = apiResponse.location.name;
-      weather2.textContent = "State: ";
-      data2.textContent = apiResponse.location.region;
-      weather3.textContent = "Country: ";
-      data3.textContent = apiResponse.location.country;
-      weather4.textContent = "Description: ";
-      data4.textContent = apiResponse.current.weather_descriptions[0];
-      weather5.textContent = "Temperature:  ";
-      data5.textContent = apiResponse.current.temperature;
+      data1.textContent = apiResponse.name;
+      weather2.textContent = "Country: ";
+      data2.textContent = apiResponse.sys.country;
+      weather3.textContent = "Description: ";
+      data3.textContent = apiResponse.weather[0].description;
+      console.log(apiResponse.weather[0]);
+      weather4.textContent = "Minimum Temperature:  ";
+      data4.textContent = apiResponse.main.temp_min;
+      weather5.textContent = "Maximum Temperature: ";
+      data5.textContent = apiResponse.main.temp_max;
       weather6.textContent = "Humidity: ";
-      data6.textContent = apiResponse.current.humidity;
+      data6.textContent = apiResponse.main.humidity;
     });
 });

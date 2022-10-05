@@ -93,6 +93,8 @@ button:hover {
   font-weight: 700;
 }
 
-.img {
-  width: 50px;
+#image {
+  width: 120px;
+  justify-self: center;
+  align-self: center;
 }
