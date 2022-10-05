@@ -10,8 +10,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 const mainRoutes = require("./routes/mainRoutes");
+const weatherRoutes = require("./routes/weatherRoutes");
 
-app.use(mainRoutes.homeRoute);
-app.use(mainRoutes.cityRoutes);
+app.use(mainRoutes);
+app.use(weatherRoutes);
 
 app.listen(1234);
